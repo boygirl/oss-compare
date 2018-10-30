@@ -1,0 +1,28 @@
+.header-title {
+  text-align: center;
+}
+div#intro {
+  text-align: center;
+  padding-bottom: 20px;
+}
+div#score {
+  display: inline-flex;
+  width: 100%;
+}
+div#score form {
+  margin: auto;
+}
+p.fetching {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+div.container {
+  display: "flex";
+  flex-direction: "row";
+}
+
+div.content {
+  max-width: "80%";
+}
