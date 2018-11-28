@@ -7,11 +7,12 @@ const adapter = new FileSync("db.json")
 const db = low(adapter);
 
 const repoNames = config.repos.map((repo) => repo.name);
+const packageNames = config.repos.map((repo) => repo.package || repo.name);
 const repoQuery = repoNames.map((r) => `repo:FormidableLabs/${r}`).join("+");
 const ghQuery = `org:FormidableLabs&per_page=100`;
 const ghReposUrl = `https://api.github.com/search/repositories?q=${repoQuery}`;
 const ghOpenPRsUrl = `https://api.github.com/search/issues?q=type:pr+state:open+${repoQuery}&per_page=100`;
-const downloadsUrl = `https://api.npmjs.org/downloads/point/last-month/${repoNames.join(",")}`;
+const downloadsUrl = `https://api.npmjs.org/downloads/point/last-month/${packageNames.join(",")}`;
 
 db.defaults({ data: [] }).write()
 
@@ -45,12 +46,13 @@ const formatData = (datas, timestamp) => {
       const name = proj.name;
       const repo = _.find(config.repos, { name }) || {};
       const prs = openPrs.filter((pr) => _.includes(pr.repository_url, name));
+      const packageName = repo.package || repo.name;
       return {
         timestamp,
         name,
         status: repo.status || "unknown",
         maintainer: repo.maintainer || "none",
-        downloads: (downloads[proj.name] || {}).downloads || -1,
+        downloads: (downloads[packageName] || {}).downloads || -1,
         stars: proj.stargazers_count,
         issues: proj.open_issues,
         prs: prs.length,

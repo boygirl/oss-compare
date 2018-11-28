@@ -8,6 +8,7 @@ import { repos } from "./config";
 
 const cellStyle = { textAlign: "center" };
 const repoNames = repos.map((repo) => repo.name);
+const projectNames = repos.map((repo) => repo.package || repo.name);
 
 const getDiffOptions = (data) => {
   const timestamps = data.map((d) => ({

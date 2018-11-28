@@ -19,7 +19,9 @@ const repos = [
   { name: "builder", status: "finished", maintainer: "ryan-roemer"},
   { name: "react-fast-compare", status: "finished", maintainer: "chrisbolin"},
   { name: "component-playground", status: "borderline", maintainer: "none"},
-  { name: "redux-little-router", status: "borderline", maintainer: "tptee" }
+  { name: "redux-little-router", status: "borderline", maintainer: "tptee" },
+  { name: "yesno", package: "yesno-http", status: "maintained", maintainer: "ianwsperber" }
+
 ];
 
 module.exports = { repos };
